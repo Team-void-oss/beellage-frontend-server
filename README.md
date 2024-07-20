@@ -13,12 +13,24 @@
 issue-tracker/
 ├── frontend/
 │   ├── public/
+│   │   ├── index.html
 │   ├── src/
 │   │   ├── components/
 │   │   │   ├── CreateIssue.js
+│   │   │   ├── EditIssue.js
 │   │   │   ├── IssueList.js
 │   │   │   ├── CreateSchedule.js
+│   │   │   ├── EditSchedule.js
 │   │   │   ├── ScheduleList.js
+│   │   ├── styles/
+│   │   │   ├── App.css
+│   │   │   ├── CreateIssue.css
+│   │   │   ├── EditIssue.css
+│   │   │   ├── IssueList.css
+│   │   │   ├── CreateSchedule.css
+│   │   │   ├── EditSchedule.css
+│   │   │   ├── ScheduleList.css
+│   │   │   ├── index.css
 │   │   ├── apiClient.js
 │   │   ├── App.js
 │   │   ├── index.js
