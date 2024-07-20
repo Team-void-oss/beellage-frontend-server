@@ -51,7 +51,7 @@ issue-tracker/
 
 ## 실행 방법
 1. 프로젝트 클론
-        ```bash
+    ```bash
     git clone https://github.com/judy-oss-team/beellage-frontend-server.git
     git checkout -b feature/issue
     git pull origin feature/issue
