@@ -51,9 +51,10 @@ issue-tracker/
 
 ## 실행 방법
 1. 프로젝트 클론
-    ```bash
-    git clone https://github.com/yourusername/issue-tracker.git
-    cd issue-tracker/frontend
+        ```bash
+    git clone https://github.com/judy-oss-team/beellage-frontend-server.git
+    git checkout -b "feature/issue"
+    git pull origin "feature/issue"
     ```
 
 2. Docker 컨테이너 실행
