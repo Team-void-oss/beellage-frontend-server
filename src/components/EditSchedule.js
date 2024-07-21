@@ -1,86 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import apiClient from '../apiClient';
 import '../styles/EditSchedule.css';
 
-const EditSchedule = () => {
-    const { teamId, scheduleId } = useParams();
-    const [title, setTitle] = useState('');
-    const [date, setDate] = useState('');
-    const [projectId, setProjectId] = useState('');
-    const [issueId, setIssueId] = useState('');
+const EditSchedule = ({ scheduleId, onUpdate }) => {
+  const [schedule, setSchedule] = useState(null);
 
-    useEffect(() => {
-        const fetchSchedule = async () => {
-            try {
-                const response = await apiClient.get(`/teams/${teamId}/schedules/${scheduleId}`);
-                const schedule = response.data;
-                setTitle(schedule.title);
-                setDate(schedule.date);
-                setProjectId(schedule.projectId);
-                setIssueId(schedule.issueId);
-            } catch (error) {
-                console.error(error);
-            }
-        };
+  useEffect(() => {
+    // Fetch schedule by id and setSchedule
+  }, [scheduleId]);
 
-        fetchSchedule();
-    }, [teamId, scheduleId]);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onUpdate(schedule);
+  };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            await apiClient.patch(`/teams/${teamId}/schedules/${scheduleId}`, {
-                title,
-                date,
-                projectId,
-                issueId
-            });
-            // Handle success
-        } catch (error) {
-            console.error(error);
-        }
-    };
+  if (!schedule) return null;
 
-    return (
-        <form onSubmit={handleSubmit}>
-            <div>
-                <label>Title:</label>
-                <input
-                    type="text"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                    required
-                />
-            </div>
-            <div>
-                <label>Date:</label>
-                <input
-                    type="datetime-local"
-                    value={date}
-                    onChange={(e) => setDate(e.target.value)}
-                    required
-                />
-            </div>
-            <div>
-                <label>Project ID:</label>
-                <input
-                    type="number"
-                    value={projectId}
-                    onChange={(e) => setProjectId(e.target.value)}
-                />
-            </div>
-            <div>
-                <label>Issue ID:</label>
-                <input
-                    type="number"
-                    value={issueId}
-                    onChange={(e) => setIssueId(e.target.value)}
-                />
-            </div>
-            <button type="submit">Update Schedule</button>
-        </form>
-    );
+  return (
+    <form onSubmit={handleSubmit} className="edit-schedule-form">
+      <input type="text" value={schedule.title} onChange={(e) => setSchedule({ ...schedule, title: e.target.value })} />
+      <input type="date" value={schedule.date} onChange={(e) => setSchedule({ ...schedule, date: e.target.value })} />
+      <input type="text" value={schedule.projectId} onChange={(e) => setSchedule({ ...schedule, projectId: e.target.value })} />
+      <input type="text" value={schedule.issueId} onChange={(e) => setSchedule({ ...schedule, issueId: e.target.value })} />
+      <button type="submit">Update Schedule</button>
+    </form>
+  );
 };
 
 export default EditSchedule;
